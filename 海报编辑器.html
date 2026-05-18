@@ -53,8 +53,8 @@
         .poster-body { background: #ffffff !important; margin: 0 20px 20px; min-height: 400px; padding: 25px; position: relative; z-index: 10; border-radius: 8px; }
         .editor-content { outline: none; line-height: 1.8; color: #333; min-height: 350px; padding: 0 20px; }
         
-        .editor-content h1 { font-size: 35px; font-weight: 700; margin: 25px 0 12px; color: var(--theme-color, #a61b1b); display: inline-block;border-bottom: 3px solid #a61b1b;     padding-bottom: 0px;}
-        .editor-content h2 { font-size: 28px; font-weight: 600; margin: 20px 0 2px; color: var(--theme-color, #a61b1b); }
+        .editor-content h1 { font-size: 35px; font-weight: 700; margin: 4px 0 10px; color: var(--theme-color, #a61b1b); display: inline-block;border-bottom: 3px solid #a61b1b;     padding-bottom: 0px;}
+        .editor-content h2 { font-size: 28px; font-weight: 600; margin: 2px 0 2px; color: var(--theme-color, #a61b1b); }
         .editor-content h3 { font-size: 20px; font-weight: 600; margin: 18px 0 2px; color: #fff; background: var(--theme-color, #a61b1b); display: inline-block; padding: 1px 10px; border-radius: 2px; line-height: 1.4; }
         .editor-content p { margin: 0 0 8px 0; font-size: 18px; text-align: justify; }
         .editor-content .annotation { font-size: 12px; color: #888; font-style: italic; }
@@ -237,11 +237,35 @@
         #headImgPreview { width: 920px; height: 504px; position: relative; overflow: hidden; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
         #headImgBg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-size: cover; background-position: center top; background-repeat: no-repeat; z-index: 0; }
         #headImgOverlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none; }
-        #headImgContent { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 80px; z-index: 2; box-sizing: border-box; }
-        .head-img-tag-el { color: #fff; padding: 8px 28px; border-radius: 6px; font-size: 26px; font-weight: 600; white-space: nowrap; line-height: 1.3; flex-shrink: 0; }
-        .head-img-title-el { font-size: 58px; font-weight: 700; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); word-break: break-word; line-height: 1.2; width: 100%; flex-shrink: 0; }
-        .head-img-subtitle-el { font-size: 30px; color: rgba(255,255,255,0.95); text-shadow: 0 1px 4px rgba(0,0,0,0.3); word-break: break-word; line-height: 1.4; width: 100%; flex-shrink: 0; }
+        #headImgContent { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 2; box-sizing: border-box; }
+        .head-img-tag-el { color: #fff; padding: 8px 28px; border-radius: 6px; font-size: 26px; font-weight: 600; white-space: pre-wrap; line-height: 1.3; position: absolute; left: 50%; transform: translateX(-50%); top: 15%; text-align: center; max-width: 80%; }
+        .head-img-title-el { font-size: 58px; font-weight: 700; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.4); word-break: break-word; line-height: 1.2; position: absolute; left: 0; right: 0; padding: 0 80px; top: 38%; text-align: center; white-space: pre-wrap; }
+        .head-img-subtitle-el { font-size: 30px; color: rgba(255,255,255,0.95); text-shadow: 0 1px 4px rgba(0,0,0,0.3); word-break: break-word; line-height: 1.4; position: absolute; left: 0; right: 0; padding: 0 80px; top: 63%; text-align: center; white-space: pre-wrap; }
+        /* 行距/段距选择器 */
+        .spacing-ctrl select { border: 1px solid rgba(255,255,255,0.3); background: rgba(20,30,50,0.92); color: white; border-radius: 3px; padding: 0 2px; cursor: pointer; height: 19px; font-size: 10px; width: 54px; }
         .head-img-settings { background: #f8f9fa; border-radius: 6px; padding: 10px 12px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+
+        /* 标题间距控件（H1/H2聚焦时浮现于海报左侧） */
+        #headingSpacingCtrl {
+            position: fixed; display: none; z-index: 1500;
+            background: rgba(20,25,45,0.93); color: white;
+            border-radius: 7px; padding: 6px 9px; font-size: 11px;
+            cursor: move; user-select: none; width: 58px; text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.13); line-height: 1.3;
+        }
+        #headingSpacingCtrl:hover { background: rgba(30,40,72,0.96); }
+        #headingSpacingCtrl .hsc-row { font-size: 9px; color: #aaa; }
+        #headingSpacingCtrl .hsc-val { font-size: 12px; font-weight: 700; color: #7ecfff; margin-bottom: 3px; }
+        #headingSpacingCtrl .hsc-icon { font-size: 15px; opacity: 0.6; margin: 2px 0 1px; }
+        #headingSpacingCtrl .hsc-hint { font-size: 9px; color: #666; margin-top: 2px; line-height: 1.4; }
+        #headingSpacingCtrl .hsc-level { font-size: 11px; font-weight: 700; color: #ffd580; margin-bottom: 3px; letter-spacing: 1px; }
+        #headingSpacingCtrl .hsc-sync {
+            margin-top: 5px; padding: 3px 0; width: 100%;
+            background: rgba(126,207,255,0.12); border: 1px solid rgba(126,207,255,0.28);
+            border-radius: 4px; color: #7ecfff; font-size: 9px; cursor: pointer; text-align: center;
+        }
+        #headingSpacingCtrl .hsc-sync:hover { background: rgba(126,207,255,0.28); }
     </style>
 </head>
 <body>
@@ -264,6 +288,37 @@
             <button class="tool-btn" onclick="execCmd('justifyCenter')"><i class="fas fa-align-center"></i><span>中</span></button>
             <button class="tool-btn" onclick="execCmd('justifyRight')"><i class="fas fa-align-right"></i><span>右</span></button>
             <button class="tool-btn" onclick="execCmd('justifyFull')"><i class="fas fa-align-justify"></i><span>齐</span></button>
+            <div class="spacing-ctrl" onmousedown="saveEditorSelectionForSpacing()" title="行间距和段间距&#10;选中文字区域则局部调整，未选中则全局调整" style="display:flex;flex-direction:column;justify-content:center;gap:3px;height:45px;padding:0 6px;border:1px solid rgba(255,255,255,0.2);border-radius:6px;background:rgba(255,255,255,0.05);">
+                <div style="display:flex;align-items:center;gap:3px;">
+                    <span style="font-size:9px;color:#ccc;white-space:nowrap;">行距</span>
+                    <select id="lineHeightSel" onchange="applyLineSpacing(this.value)">
+                        <option value="">—</option>
+                        <option value="1.0">1.0</option>
+                        <option value="1.2">1.2</option>
+                        <option value="1.4">1.4</option>
+                        <option value="1.5">1.5</option>
+                        <option value="1.6">1.6</option>
+                        <option value="1.8">1.8</option>
+                        <option value="2.0">2.0</option>
+                        <option value="2.5">2.5</option>
+                        <option value="3.0">3.0</option>
+                    </select>
+                </div>
+                <div style="display:flex;align-items:center;gap:3px;">
+                    <span style="font-size:9px;color:#ccc;white-space:nowrap;">段距</span>
+                    <select id="paraSpacingSel" onchange="applyParaSpacing(this.value)">
+                        <option value="">—</option>
+                        <option value="0">0</option>
+                        <option value="4">4px</option>
+                        <option value="8">8px</option>
+                        <option value="12">12px</option>
+                        <option value="16">16px</option>
+                        <option value="20">20px</option>
+                        <option value="24">24px</option>
+                        <option value="32">32px</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="tool-group">
             <button class="tool-btn" onclick="showLinkModal()"><i class="fas fa-link"></i><span>链接</span></button>
@@ -557,6 +612,18 @@
         </div>
     </div>
 
+    <!-- 标题间距控件：光标在H1/H2/H3时显示于海报左侧，可拖动调整上边距和水平位置 -->
+    <div id="headingSpacingCtrl" title="↕ 拖动：调整上边距  ↔ 拖动：调整水平位置">
+        <div class="hsc-level" id="hscLevel">H1</div>
+        <div class="hsc-row">上边距</div>
+        <div class="hsc-val" id="hscTopVal">4px</div>
+        <div class="hsc-row">左偏移</div>
+        <div class="hsc-val" id="hscLeftVal">0px</div>
+        <div class="hsc-icon">⠿</div>
+        <div class="hsc-hint">↕上边距<br>↔水平位</div>
+        <div class="hsc-sync" id="hscSyncBtn" title="将此上边距和左偏移同步到全部同级标题">同步同级</div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <!-- 头图生成弹窗 -->
@@ -574,8 +641,8 @@
                         <div id="headImgBg"></div>
                         <div id="headImgOverlay"></div>
                         <div id="headImgContent">
-                            <div id="headImgTagEl" class="head-img-tag-el" style="display:none;margin-bottom:20px;"></div>
-                            <div id="headImgTitleEl" class="head-img-title-el" style="display:none;margin-bottom:16px;"></div>
+                            <div id="headImgTagEl" class="head-img-tag-el" style="display:none;"></div>
+                            <div id="headImgTitleEl" class="head-img-title-el" style="display:none;"></div>
                             <div id="headImgSubtitleEl" class="head-img-subtitle-el" style="display:none;"></div>
                         </div>
                     </div>
@@ -583,19 +650,42 @@
             </div>
 
             <!-- 文字设置 -->
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
-                <div class="field" style="min-width:100px;flex:1;">
-                    <label>标签</label>
-                    <input type="text" id="headImgTagInput" placeholder="可为空" oninput="updateHeadImgPreview()">
+            <div style="margin-bottom:12px;">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:8px;">
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                            <label style="font-size:11px;color:#555;font-weight:600;">标签</label>
+                            <span style="font-size:10px;color:#888;display:flex;align-items:center;gap:2px;">
+                                位置
+                                <input type="number" id="headImgTagTop" min="0" max="90" value="15" oninput="updateHeadImgPreview()" style="width:38px;font-size:10px;padding:1px 3px;border:1px solid #ddd;border-radius:3px;margin-left:2px;">%
+                            </span>
+                        </div>
+                        <textarea id="headImgTagInput" placeholder="可为空，支持换行" rows="2" oninput="updateHeadImgPreview()" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:4px;font-size:12px;resize:vertical;font-family:inherit;"></textarea>
+                    </div>
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                            <label style="font-size:11px;color:#555;font-weight:600;">主标题</label>
+                            <span style="font-size:10px;color:#888;display:flex;align-items:center;gap:2px;">
+                                位置
+                                <input type="number" id="headImgTitleTop" min="0" max="90" value="38" oninput="updateHeadImgPreview()" style="width:38px;font-size:10px;padding:1px 3px;border:1px solid #ddd;border-radius:3px;margin-left:2px;">%
+                            </span>
+                        </div>
+                        <textarea id="headImgTitleInput" placeholder="支持换行输入" rows="2" oninput="updateHeadImgPreview()" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:4px;font-size:12px;resize:vertical;font-family:inherit;"></textarea>
+                    </div>
+                    <div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+                            <label style="font-size:11px;color:#555;font-weight:600;">副标题</label>
+                            <span style="font-size:10px;color:#888;display:flex;align-items:center;gap:2px;">
+                                位置
+                                <input type="number" id="headImgSubtitleTop" min="0" max="90" value="63" oninput="updateHeadImgPreview()" style="width:38px;font-size:10px;padding:1px 3px;border:1px solid #ddd;border-radius:3px;margin-left:2px;">%
+                            </span>
+                        </div>
+                        <textarea id="headImgSubtitleInput" placeholder="支持换行输入" rows="2" oninput="updateHeadImgPreview()" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:4px;font-size:12px;resize:vertical;font-family:inherit;"></textarea>
+                    </div>
                 </div>
-                <div class="field" style="min-width:160px;flex:2;">
-                    <label>主标题</label>
-                    <input type="text" id="headImgTitleInput" oninput="updateHeadImgPreview()">
-                </div>
-                <div class="field" style="min-width:160px;flex:2;">
-                    <label>副标题</label>
-                    <input type="text" id="headImgSubtitleInput" oninput="updateHeadImgPreview()">
-                </div>
+                <!-- 自定义文字框列表 -->
+                <div id="headImgCustomBoxes" style="margin-top:4px;"></div>
+                <button onclick="addHeadImgTextBox()" style="width:100%;padding:7px;border:1px dashed #bbb;background:#f8f8f8;border-radius:6px;font-size:12px;cursor:pointer;color:#555;margin-top:6px;"><i class="fas fa-plus-circle" style="color:#667eea;"></i> 添加自定义文字框</button>
             </div>
 
             <!-- 样式设置 -->
@@ -608,9 +698,9 @@
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:160px;">
                     <label style="font-size:12px;color:#555;white-space:nowrap;">遮罩透明度</label>
-                    <input type="range" id="headImgOverlayOpacity" min="0" max="80" value="30"
+                    <input type="range" id="headImgOverlayOpacity" min="0" max="80" value="10"
                            style="flex:1;" oninput="updateHeadImgPreview()">
-                    <span id="headImgOverlayVal" style="font-size:12px;color:#555;min-width:30px;">30%</span>
+                    <span id="headImgOverlayVal" style="font-size:12px;color:#555;min-width:30px;">10%</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:8px;">
                     <label style="font-size:12px;color:#555;white-space:nowrap;">背景图替换</label>
@@ -623,7 +713,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;">
                 <span style="font-size:12px;color:#aaa;">
                     <i class="fas fa-info-circle"></i>
-                    背景默认使用长图顶部背景，文字为空时自动垂直居中
+                    背景默认使用长图顶部背景，标题位置可通过修改百分比实现
                 </span>
                 <div>
                     <button class="modal-btn modal-btn-default" onclick="hideModal('headImgModal')">取消</button>
@@ -653,6 +743,7 @@ document.addEventListener('DOMContentLoaded', function() {
     applyBg(DEFAULT_BG);
     document.getElementById('bgPreview').innerHTML = '<img src="' + DEFAULT_BG + '">';
     initFloatSystem();
+    initHeadingSpacingCtrl();
 });
 
 function init() {
@@ -689,6 +780,104 @@ function fillInitialContent(data) {
     }
 }
 
+// ===== 行间距 / 段间距 =====
+// 在 mousedown 时保存选区（点击下拉框后选区会立即丢失，需提前捕获）
+var savedEditorRange = null;
+
+function saveEditorSelectionForSpacing() {
+    var sel = window.getSelection();
+    if (sel && sel.rangeCount > 0 && !sel.isCollapsed) {
+        var range = sel.getRangeAt(0);
+        var editor = document.getElementById('editor');
+        if (editor && editor.contains(range.commonAncestorContainer)) {
+            savedEditorRange = range.cloneRange();
+            return;
+        }
+    }
+    savedEditorRange = null;
+}
+
+function getSelectedBlocks(range) {
+    var blocks = [];
+    var editor = document.getElementById('editor');
+    var blockEls = editor.querySelectorAll('p, h1, h2, h3, div.highlight-box, div.text-box, div.tip-box');
+    blockEls.forEach(function(block) {
+        try {
+            if (range.intersectsNode(block)) blocks.push(block);
+        } catch(e) {
+            var br = document.createRange();
+            br.selectNode(block);
+            if (range.compareBoundaryPoints(Range.END_TO_START, br) < 0 &&
+                range.compareBoundaryPoints(Range.START_TO_END, br) > 0) {
+                blocks.push(block);
+            }
+        }
+    });
+    if (blocks.length === 0) {
+        var c = range.startContainer;
+        if (c.nodeType === 3) c = c.parentElement;
+        var b = c.closest && c.closest('p, h1, h2, h3, div.highlight-box, div.text-box, div.tip-box');
+        if (b) blocks.push(b);
+    }
+    return blocks;
+}
+
+function applyLineSpacing(value) {
+    if (value === '' || value === undefined) return;
+    var editor = document.getElementById('editor');
+    // 优先使用 mousedown 时保存的选区（此时点击下拉框选区已丢失）
+    if (savedEditorRange && !savedEditorRange.collapsed) {
+        var blocks = getSelectedBlocks(savedEditorRange);
+        if (blocks.length > 0) {
+            blocks.forEach(function(block) { block.style.lineHeight = value; });
+            showToast('已应用行间距 ' + value + ' 到选中区域');
+            return;
+        }
+    }
+    // 全局模式：先清除所有块元素上的局部内联 lineHeight（内联优先级高于外部规则，不清除则无法覆盖）
+    editor.style.lineHeight = '';
+    editor.querySelectorAll('p, h1, h2, h3, div.highlight-box, div.text-box, div.tip-box').forEach(function(el) {
+        el.style.lineHeight = '';
+    });
+    // 再注入动态样式规则（ID 选择器，对后续新增内容也持续有效）
+    var styleEl = document.getElementById('dynamic-line-spacing');
+    if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = 'dynamic-line-spacing';
+        document.head.appendChild(styleEl);
+    }
+    styleEl.textContent = '#editor, #editor p, #editor h1, #editor h2, #editor h3, #editor .highlight-box, #editor .text-box, #editor .tip-box { line-height: ' + value + '; }';
+    showToast('已全局应用行间距 ' + value);
+}
+
+function applyParaSpacing(value) {
+    if (value === '' || value === undefined) return;
+    var px = value + 'px';
+    var editor = document.getElementById('editor');
+    if (savedEditorRange && !savedEditorRange.collapsed) {
+        var blocks = getSelectedBlocks(savedEditorRange);
+        if (blocks.length > 0) {
+            blocks.forEach(function(block) { block.style.marginBottom = px; });
+            showToast('已应用段间距 ' + px + ' 到选中区域');
+            return;
+        }
+    }
+    // 全局模式：先清除所有块元素上的局部内联 marginBottom
+    editor.querySelectorAll('p, h1, h2, h3').forEach(function(el) {
+        el.style.marginBottom = '';
+    });
+    // 再注入动态样式规则
+    var styleEl = document.getElementById('dynamic-para-spacing');
+    if (!styleEl) {
+        styleEl = document.createElement('style');
+        styleEl.id = 'dynamic-para-spacing';
+        document.head.appendChild(styleEl);
+    }
+    styleEl.textContent = '#editor p, #editor h1, #editor h2, #editor h3 { margin-bottom: ' + px + '; }';
+    showToast('已全局应用段间距 ' + px);
+}
+// ===== 行间距 / 段间距 END =====
+
 function execCmd(cmd, val) {
     var editor = document.getElementById('editor');
     editor.focus();
@@ -713,19 +902,60 @@ function setFormat(tag) {
     var editor = document.getElementById('editor');
     editor.focus();
     var sel = window.getSelection();
-    if (sel.rangeCount === 0) return;
+    if (!sel || sel.rangeCount === 0) return;
 
     if (tag === 'annotation') {
         var selectedText = sel.toString();
         if (selectedText.length === 0) return;
         var html = '<span class="annotation">' + selectedText.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</span>';
         document.execCommand('insertHTML', false, html);
-    } else if (tag === 'P') {
-        document.execCommand('removeFormat', false, null);
-        document.execCommand('formatBlock', false, 'P');
-    } else {
-        document.execCommand('formatBlock', false, tag);
+        return;
     }
+
+    if (tag === 'P') {
+        document.execCommand('formatBlock', false, 'P');
+        document.execCommand('removeFormat', false, null);
+        return;
+    }
+
+    // H1 / H2 / H3：直接替换当前块元素，避免嵌套样式残留
+    var range = sel.getRangeAt(0);
+    var container = range.startContainer;
+    if (container.nodeType === 3) container = container.parentNode;
+
+    // 找到编辑器内最近的块级祖先
+    var block = container;
+    while (block && block !== editor) {
+        var tn = (block.tagName || '').toUpperCase();
+        if (/^(H[1-6]|P|DIV|LI|BLOCKQUOTE|PRE)$/.test(tn)) break;
+        block = block.parentNode;
+    }
+
+    if (!block || block === editor) {
+        document.execCommand('formatBlock', false, tag);
+        return;
+    }
+
+    // 创建新标签，将现有内容迁移进去（保留行内格式，不嵌套块标签）
+    var newEl = document.createElement(tag);
+    while (block.firstChild) {
+        newEl.appendChild(block.firstChild);
+    }
+    // 保留由间距控件设置的自定义样式
+    if (block.style.marginTop)    newEl.style.marginTop    = block.style.marginTop;
+    if (block.style.marginLeft)   newEl.style.marginLeft   = block.style.marginLeft;
+    if (block.style.lineHeight)   newEl.style.lineHeight   = block.style.lineHeight;
+    if (block.style.marginBottom) newEl.style.marginBottom = block.style.marginBottom;
+    block.parentNode.replaceChild(newEl, block);
+
+    // 光标置于新元素末尾
+    try {
+        var newRange = document.createRange();
+        newRange.selectNodeContents(newEl);
+        newRange.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(newRange);
+    } catch(e) {}
 }
 
 // 链接功能
@@ -1826,7 +2056,7 @@ function exportHTML() {
         .editor-content h1 { 
             font-size: 35px; 
             font-weight: 700; 
-            margin: 25px 0 12px; 
+            margin: 10px 0 12px; 
             color: ${themeColor}; 
             display: inline-block; /* 关键：让下划线只跟着文字走 */
             border-bottom: 3px solid ${themeColor}; /* 下划线样式 */
@@ -1835,7 +2065,7 @@ function exportHTML() {
         .editor-content h2 { 
             font-size: 28px; 
             font-weight: 600; 
-            margin: 20px 0 2px; 
+            margin: 5px 0 2px; 
             color: ${themeColor}; 
         }
         .editor-content h3 { 
@@ -2471,6 +2701,11 @@ function showHeadImgModal() {
     document.getElementById('headImgTitleInput').value = document.getElementById('mainTitle').value;
     document.getElementById('headImgSubtitleInput').value = document.getElementById('subTitle').value;
 
+    // 重置位置到默认值
+    document.getElementById('headImgTagTop').value      = 15;
+    document.getElementById('headImgTitleTop').value    = 38;
+    document.getElementById('headImgSubtitleTop').value = 63;
+
     // 同步背景图（长图顶部背景）
     var bgLayer = document.getElementById('posterBgLayer');
     document.getElementById('headImgBg').style.backgroundImage = bgLayer.style.backgroundImage;
@@ -2480,6 +2715,10 @@ function showHeadImgModal() {
 
     // 重置背景图替换 input
     document.getElementById('headImgBgInput').value = '';
+
+    // 重置自定义文字框
+    headImgCustomBoxes = [];
+    renderHeadImgCustomBoxControls();
 
     // 打开弹窗
     document.getElementById('headImgModal').classList.add('show');
@@ -2510,15 +2749,22 @@ function updateHeadImgPreview() {
     var opacity  = parseInt(document.getElementById('headImgOverlayOpacity').value) || 0;
     var tagColor = document.getElementById('headImgTagColor').value;
 
+    var tagTop      = parseFloat(document.getElementById('headImgTagTop').value);
+    var titleTop    = parseFloat(document.getElementById('headImgTitleTop').value);
+    var subtitleTop = parseFloat(document.getElementById('headImgSubtitleTop').value);
+    if (isNaN(tagTop))      tagTop = 15;
+    if (isNaN(titleTop))    titleTop = 38;
+    if (isNaN(subtitleTop)) subtitleTop = 63;
+
     document.getElementById('headImgOverlayVal').textContent = opacity + '%';
 
     // ---- 标签 ----
     var tagEl = document.getElementById('headImgTagEl');
     if (tag) {
-        tagEl.textContent = tag;
-        tagEl.style.display          = 'inline-block';
-        tagEl.style.backgroundColor  = tagColor;
-        tagEl.style.marginBottom     = '20px';
+        tagEl.innerHTML             = tag.replace(/\n/g, '<br>');
+        tagEl.style.display         = 'inline-block';
+        tagEl.style.backgroundColor = tagColor;
+        tagEl.style.top             = tagTop + '%';
     } else {
         tagEl.style.display = 'none';
     }
@@ -2526,10 +2772,9 @@ function updateHeadImgPreview() {
     // ---- 主标题 ----
     var titleEl = document.getElementById('headImgTitleEl');
     if (title) {
-        titleEl.textContent      = title;
-        titleEl.style.display    = 'block';
-        // 有副标题时保留下边距，否则归零，让 flexbox 垂直居中更精准
-        titleEl.style.marginBottom = subtitle ? '16px' : '0';
+        titleEl.innerHTML    = title.replace(/\n/g, '<br>');
+        titleEl.style.display = 'block';
+        titleEl.style.top     = titleTop + '%';
     } else {
         titleEl.style.display = 'none';
     }
@@ -2537,8 +2782,9 @@ function updateHeadImgPreview() {
     // ---- 副标题 ----
     var subtitleEl = document.getElementById('headImgSubtitleEl');
     if (subtitle) {
-        subtitleEl.textContent   = subtitle;
+        subtitleEl.innerHTML    = subtitle.replace(/\n/g, '<br>');
         subtitleEl.style.display = 'block';
+        subtitleEl.style.top     = subtitleTop + '%';
     } else {
         subtitleEl.style.display = 'none';
     }
@@ -2546,6 +2792,9 @@ function updateHeadImgPreview() {
     // ---- 遮罩 ----
     document.getElementById('headImgOverlay').style.background =
         'rgba(0,0,0,' + (opacity / 100).toFixed(2) + ')';
+
+    // ---- 自定义文字框 ----
+    updateHeadImgCustomBoxes();
 }
 
 function replaceHeadImgBg(input) {
@@ -2602,6 +2851,95 @@ function exportHeadImg() {
     });
 }
 // ===== 头图功能 END =====
+
+// ===== 头图自定义文字框 =====
+var headImgCustomBoxes = [];
+
+function addHeadImgTextBox() {
+    var id = 'hcb_' + Date.now();
+    headImgCustomBoxes.push({ id: id, text: '', top: 80, fontSize: 26, color: '#ffffff', bold: false });
+    renderHeadImgCustomBoxControls();
+    updateHeadImgPreview();
+}
+
+function removeHeadImgCustomBox(id) {
+    headImgCustomBoxes = headImgCustomBoxes.filter(function(b) { return b.id !== id; });
+    renderHeadImgCustomBoxControls();
+    updateHeadImgPreview();
+}
+
+function renderHeadImgCustomBoxControls() {
+    var container = document.getElementById('headImgCustomBoxes');
+    if (!container) return;
+    var html = '';
+    headImgCustomBoxes.forEach(function(box, idx) {
+        html += '<div style="display:flex;gap:6px;align-items:flex-start;margin-bottom:6px;padding:8px 10px;background:#f0f4ff;border:1px solid #d0d8f0;border-radius:6px;">';
+        // 文字输入区
+        html += '<div style="flex:1;">';
+        html += '<div style="font-size:10px;color:#667eea;font-weight:600;margin-bottom:3px;">自定义文字框 ' + (idx + 1) + '</div>';
+        html += '<textarea id="hcb_text_' + box.id + '" rows="2" placeholder="输入文字内容，支持换行" oninput="onCustomBoxChange(\'' + box.id + '\')" style="width:100%;padding:5px;border:1px solid #ddd;border-radius:4px;font-size:12px;resize:vertical;font-family:inherit;">' + escapeHtml(box.text) + '</textarea>';
+        html += '</div>';
+        // 样式列
+        html += '<div style="display:flex;flex-direction:column;gap:4px;min-width:70px;">';
+        html += '<label style="font-size:10px;color:#555;">字号<br><input type="number" id="hcb_fs_' + box.id + '" min="12" max="90" value="' + box.fontSize + '" oninput="onCustomBoxChange(\'' + box.id + '\')" style="width:62px;padding:2px 4px;border:1px solid #ddd;border-radius:3px;font-size:11px;"></label>';
+        html += '<label style="font-size:10px;color:#555;">颜色<br><input type="color" id="hcb_color_' + box.id + '" value="' + box.color + '" oninput="onCustomBoxChange(\'' + box.id + '\')" style="width:62px;height:24px;padding:1px;border:1px solid #ddd;border-radius:3px;cursor:pointer;"></label>';
+        html += '</div>';
+        // 位置列
+        html += '<div style="display:flex;flex-direction:column;gap:4px;min-width:70px;">';
+        html += '<label style="font-size:10px;color:#555;">垂直位置%<br><input type="number" id="hcb_top_' + box.id + '" min="0" max="92" value="' + box.top + '" oninput="onCustomBoxChange(\'' + box.id + '\')" style="width:62px;padding:2px 4px;border:1px solid #ddd;border-radius:3px;font-size:11px;"></label>';
+        html += '<label style="font-size:10px;color:#555;display:flex;align-items:center;gap:4px;margin-top:4px;"><input type="checkbox" id="hcb_bold_' + box.id + '"' + (box.bold ? ' checked' : '') + ' onchange="onCustomBoxChange(\'' + box.id + '\')"> 加粗</label>';
+        html += '</div>';
+        // 删除按钮
+        html += '<button onclick="removeHeadImgCustomBox(\'' + box.id + '\')" title="删除此文字框" style="align-self:flex-start;padding:4px 8px;border:none;background:#ff6b6b;color:white;border-radius:4px;cursor:pointer;font-size:13px;margin-top:14px;line-height:1;">×</button>';
+        html += '</div>';
+    });
+    container.innerHTML = html;
+}
+
+function onCustomBoxChange(id) {
+    var box = headImgCustomBoxes.find(function(b) { return b.id === id; });
+    if (!box) return;
+    var textEl  = document.getElementById('hcb_text_'  + id);
+    var fsEl    = document.getElementById('hcb_fs_'    + id);
+    var colorEl = document.getElementById('hcb_color_' + id);
+    var topEl   = document.getElementById('hcb_top_'   + id);
+    var boldEl  = document.getElementById('hcb_bold_'  + id);
+    if (textEl)  box.text     = textEl.value  || '';
+    if (fsEl)    box.fontSize = parseInt(fsEl.value)   || 26;
+    if (colorEl) box.color    = colorEl.value || '#ffffff';
+    if (topEl)   box.top      = parseFloat(topEl.value);
+    if (isNaN(box.top)) box.top = 80;
+    if (boldEl)  box.bold     = boldEl.checked;
+    updateHeadImgPreview();
+}
+
+function updateHeadImgCustomBoxes() {
+    document.querySelectorAll('#headImgContent .head-img-custom-el').forEach(function(el) { el.remove(); });
+    var content = document.getElementById('headImgContent');
+    if (!content) return;
+    headImgCustomBoxes.forEach(function(box) {
+        if (!box.text.trim()) return;
+        var el = document.createElement('div');
+        el.className = 'head-img-custom-el';
+        el.style.cssText = [
+            'position:absolute',
+            'top:' + box.top + '%',
+            'left:0', 'right:0',
+            'text-align:center',
+            'padding:0 80px',
+            'font-size:' + box.fontSize + 'px',
+            'color:' + box.color,
+            'font-weight:' + (box.bold ? '700' : '400'),
+            'word-break:break-word',
+            'line-height:1.4',
+            'text-shadow:0 1px 4px rgba(0,0,0,0.3)',
+            'white-space:pre-wrap'
+        ].join(';');
+        el.innerHTML = box.text.replace(/\n/g, '<br>');
+        content.appendChild(el);
+    });
+}
+// ===== 头图自定义文字框 END =====
 
 document.getElementById('bgColorPicker').addEventListener('input', function() {
     document.getElementById('bgColorInput').value = this.value;
@@ -3426,6 +3764,138 @@ function applyParsedText(mode) {
         updateTitle();
     }
 }
+
+// ===== 标题间距控件 =====
+var _hscTarget = null;
+var _hscDragging = false;
+var _hscSX = 0, _hscSY = 0, _hscSTop = 0, _hscSLeft = 0;
+
+// 各级标题的 CSS 默认上边距（与样式表保持一致）
+function _hscDefTop(el) {
+    if (!el) return 0;
+    if (el.tagName === 'H1') return 4;
+    if (el.tagName === 'H2') return 2;
+    if (el.tagName === 'H3') return 18;
+    return 0;
+}
+
+function initHeadingSpacingCtrl() {
+    var ctrl = document.getElementById('headingSpacingCtrl');
+    if (!ctrl) return;
+
+    // 鼠标按下：开始拖拽（同步按钮会自行 stopPropagation，不会触发此处）
+    ctrl.addEventListener('mousedown', function(e) {
+        if (!_hscTarget) return;
+        if (e.target.id === 'hscSyncBtn') return; // 点按钮时不拖
+        _hscDragging = true;
+        _hscSX = e.clientX;
+        _hscSY = e.clientY;
+        _hscSTop  = (_hscTarget.style.marginTop  !== '') ? (parseInt(_hscTarget.style.marginTop)  || 0) : _hscDefTop(_hscTarget);
+        _hscSLeft = (_hscTarget.style.marginLeft !== '') ? (parseInt(_hscTarget.style.marginLeft) || 0) : 0;
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
+    // 拖拽移动：↕ 调整上边距，↔ 调整水平偏移
+    document.addEventListener('mousemove', function(e) {
+        if (!_hscDragging || !_hscTarget) return;
+        var scale = zoomLevel || 1;
+        var dy = e.clientY - _hscSY;
+        var dx = e.clientX - _hscSX;
+        var newTop  = Math.max(-100, Math.round(_hscSTop  + dy / scale));
+        var newLeft = Math.max(-20,  Math.min(400, Math.round(_hscSLeft + dx / scale)));
+        _hscTarget.style.marginTop  = newTop  + 'px';
+        _hscTarget.style.marginLeft = newLeft + 'px';
+        document.getElementById('hscTopVal').textContent  = newTop  + 'px';
+        document.getElementById('hscLeftVal').textContent = newLeft + 'px';
+        _hscUpdatePos();
+        e.preventDefault();
+    });
+
+    document.addEventListener('mouseup', function() { _hscDragging = false; });
+
+    // 同步按钮：将当前值应用到编辑器内所有同级标题
+    var syncBtn = document.getElementById('hscSyncBtn');
+    if (syncBtn) {
+        syncBtn.addEventListener('mousedown', function(e) {
+            e.stopPropagation(); // 阻止触发父级拖拽
+            e.preventDefault();  // 防止编辑器失焦
+        });
+        syncBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            _hscSyncAll();
+        });
+    }
+
+    // 选区变化：光标进入/离开 H1/H2/H3 时显示/隐藏控件
+    document.addEventListener('selectionchange', function() {
+        if (_hscDragging) return;
+        var editor = document.getElementById('editor');
+        var sel = window.getSelection();
+        if (!sel || sel.rangeCount === 0) { _hscHide(); return; }
+        var range = sel.getRangeAt(0);
+        var node = range.startContainer;
+        if (node.nodeType === 3) node = node.parentNode;
+        if (!editor || !editor.contains(node)) { _hscHide(); return; }
+        var h = null, cur = node;
+        while (cur && cur !== editor) {
+            if (cur.tagName === 'H1' || cur.tagName === 'H2' || cur.tagName === 'H3') { h = cur; break; }
+            cur = cur.parentNode;
+        }
+        if (h) { _hscTarget = h; _hscUpdatePos(); }
+        else _hscHide();
+    });
+
+    // 预览区滚动时同步更新控件位置
+    var pa = document.getElementById('previewArea');
+    if (pa) pa.addEventListener('scroll', function() { if (_hscTarget) _hscUpdatePos(); });
+}
+
+function _hscUpdatePos() {
+    var ctrl = document.getElementById('headingSpacingCtrl');
+    if (!ctrl || !_hscTarget) return;
+    var rect       = _hscTarget.getBoundingClientRect();
+    var posterRect = document.getElementById('poster').getBoundingClientRect();
+    ctrl.style.display = 'block';
+    var cw = ctrl.offsetWidth || 58;
+    // 定位在海报左侧外，与标题顶部对齐
+    ctrl.style.left = Math.max(4, posterRect.left - cw - 10) + 'px';
+    ctrl.style.top  = Math.max(64, rect.top) + 'px';
+    var mt = (_hscTarget.style.marginTop  !== '') ? (parseInt(_hscTarget.style.marginTop)  || 0) : _hscDefTop(_hscTarget);
+    var ml = (_hscTarget.style.marginLeft !== '') ? (parseInt(_hscTarget.style.marginLeft) || 0) : 0;
+    document.getElementById('hscTopVal').textContent  = mt + 'px';
+    document.getElementById('hscLeftVal').textContent = ml + 'px';
+    // 更新级别标签
+    var lvlEl = document.getElementById('hscLevel');
+    if (lvlEl) lvlEl.textContent = _hscTarget.tagName;
+}
+
+function _hscHide() {
+    var ctrl = document.getElementById('headingSpacingCtrl');
+    if (ctrl) ctrl.style.display = 'none';
+    _hscTarget = null;
+}
+
+// 将当前标题的上边距和左偏移同步到编辑器内所有同级标题
+function _hscSyncAll() {
+    if (!_hscTarget) return;
+    var editor = document.getElementById('editor');
+    var tag = _hscTarget.tagName.toLowerCase(); // h1 / h2 / h3
+    var mt = _hscTarget.style.marginTop;
+    var ml = _hscTarget.style.marginLeft;
+    var count = 0;
+    editor.querySelectorAll(tag).forEach(function(el) {
+        if (el === _hscTarget) return; // 跳过自身
+        if (mt !== '') el.style.marginTop  = mt;
+        if (ml !== '') el.style.marginLeft = ml;
+        count++;
+    });
+    var label = _hscTarget.tagName;
+    showToast(count > 0
+        ? ('已同步到其余 ' + count + ' 个 ' + label + ' 标题')
+        : ('当前是唯一的 ' + label + ' 标题，无需同步'));
+}
+// ===== 标题间距控件 END =====
 
 // =============== 切片功能 ===============
 var sliceMarkers = []; // 存储标记点的 Y 位置（相对于 poster 顶部的未缩放像素）
